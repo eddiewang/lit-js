@@ -339,6 +339,15 @@ function TinderClient() {
   };
 
   /**
+   * Gets profile info, including photo optimization info
+   * @param  {Function} callback [description]
+   */
+  this.getProfile = function(callback) {
+    tinderPost('profile',
+      makeTinderCallback(callback));
+  };
+
+  /**
    * Update your gender
    * @param {Number} gender is your gender (0 = Male, 1 = Female)
    * @param {Function} callback the callback to invoke when the request completes
@@ -527,6 +536,14 @@ function TinderClient() {
     if (causeId === 0 && causeText !== null) data.text = causeText;
     tinderPost('report/' + userId,
       data,
+      makeTinderCallback(callback));
+  };
+
+  this.createUsername = function(username, callback) {
+    tinderPost('profile/username',
+      {
+        username: username
+      },
       makeTinderCallback(callback));
   };
 
