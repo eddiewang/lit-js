@@ -135,7 +135,7 @@ function TinderClient() {
       function(error, res) {
         // If no body is passed back, return an error
         if(res.body === undefined){
-          throw new Error('No token passed back from Tinder');
+          callback(error, 'No token passed back from Tinder');
         }
 
         var body = res.body || { 'token': null };
@@ -147,7 +147,7 @@ function TinderClient() {
           callback = makeTinderCallback(callback);
           callback(error, res);
         } else if (body.error){
-          throw new Error("Failed to authenticate: " + body.error);
+          callback(error, "Failed to authenticate: " + body.error);
         } else {
           callback(error, res);
         }
